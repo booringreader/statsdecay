@@ -1,17 +1,16 @@
-#pragma once
-#include<random>
+#ifndef PROBABILITY_UTIL_H
+#define PROBABILITY_UTIL_H
 
-struct RNG{
+#include <random>
+
+class RNG {
+private:
     std::mt19937 gen;
 
-    RNG(unsigned seed) : gen(seed) {};
-
-    double uniform(double a, double b){
-        std::uniform_real_distribution<double> d(a, b);
-        return d(gen);
-    }
-    int randint(int a, int b){
-        std::uniform_int_distribution<int> i(a,b);
-        return i(gen);
-    }
+public:
+    RNG();
+    double uniform(double min, double max);
+    int randint(int min, int max);
 };
+
+#endif

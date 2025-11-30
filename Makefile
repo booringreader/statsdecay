@@ -1,13 +1,27 @@
-CXX = clang++
-CXXFLAGS = -O2 -std=c++17 -Wall
+HOMEBREW_PREFIX := $(shell brew --prefix)
+LLVM_PREFIX := $(shell brew --prefix llvm)
 
-SRC = src/main.cpp src/branching_model.cpp src/probability_util.cpp src/histogram.cpp
-OBJ = $(SRC:.cpp=.o)
+CXX := $(LLVM_PREFIX)/bin/clang++
+CXXFLAGS = -std=c++17 -stdlib=libc++ -Wall -Wextra \
+           -I$(LLVM_PREFIX)/include/c++/v1 \
+           --sysroot=$(shell xcrun --show-sdk-path)
+LDFLAGS = -L$(LLVM_PREFIX)/lib -lc++
 
-all: statsDecay
+SRCDIR = src
+SRCS = $(wildcard $(SRCDIR)/*.cpp)
+OBJS = $(SRCS:.cpp=.o)
+EXEC = statsdecay
+BINDIR = .
 
-statsDecay: $(OBJ)
-	$(CXX) $(CXXFLAGS) -o statsDecay $(OBJ)
+all: $(EXEC)
+
+$(EXEC): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(EXEC) $(LDFLAGS)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) statsDecay
+	rm -f $(OBJS) $(EXEC)
+
+.PHONY: all clean

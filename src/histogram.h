@@ -1,6 +1,18 @@
-#pragma once
-#include <vector>
-#include <string>
+#ifndef HISTOGRAM_H
+#define HISTOGRAM_H
 
-void print_histogram(const std::vector<double>& data, int bins);
-void write_csv(const std::vector<double>& data, const std::string& filename);
+#include <vector>
+
+class Histogram {
+private:
+    std::vector<double> data;
+    int num_bins;
+    double min_val, bin_width;
+
+public:
+    Histogram(int bins, double min, double max);
+    void add(double val);
+    std::vector<double> get_bins() const;  // Returns vector of bin counts
+};
+
+#endif // HISTOGRAM_H

@@ -1,18 +1,22 @@
-#pragma once
-#include<vector>
-#include<cstdint>
-#include "probability_util.h"
+#ifndef BRANCHING_MODEL_H
+#define BRANCHING_MODEL_H
 
-struct BranchingResult{
+#include "probability_util.h"
+#include<bits/stdc++.h>
+
+struct BranchingResult {
     std::vector<double> k_values;
     int generations_completed;
 };
 
-class BranchingModel{
-public:
+class BranchingModel {
+private:
     int max_generations;
-    int max_particles_allowed;
+    long long max_particles;
 
-    BranchingModel(int max_gen, int max_particles);
+public:
+    BranchingModel(int max_gen, long long max_part);
     BranchingResult simulate(double mass_kg, RNG& rng);
 };
+
+#endif

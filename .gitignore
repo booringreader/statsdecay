@@ -1,8 +1,8 @@
 statsdecay
-*.o
-*.d
-*.exe
-*.out
+src/*.o
+src/*.d
+src/*.exe
+src/*.out
 
 .DS_Store
 ._*
