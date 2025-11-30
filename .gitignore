@@ -1,0 +1,13 @@
+statsdecay
+*.o
+*.d
+*.exe
+*.out
+
+.DS_Store
+._*
+
+.vscode/
+*.swp
+
+*.tmp
