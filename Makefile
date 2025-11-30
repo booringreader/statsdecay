@@ -10,7 +10,7 @@ LDFLAGS = -L$(LLVM_PREFIX)/lib -lc++
 SRCDIR = src
 SRCS = $(wildcard $(SRCDIR)/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
-EXEC = statsdecay
+EXEC = branching_sim 
 BINDIR = .
 
 all: $(EXEC)
